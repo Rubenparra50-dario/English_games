@@ -36,6 +36,10 @@ export default class GamesHome extends Component {
       this.props.navigation.navigate('Hanged')
   }
 
+  handlePressMemory = () => {
+    this.props.navigation.navigate('Memory')
+  }
+
     _toggleBottomNavigationView = () => {
         this.setState({ visible: !this.state.visible });
     };
@@ -71,6 +75,7 @@ export default class GamesHome extends Component {
 
     //   //handlePressStatus={this.handlePressStatus}
        handlePressHanged={this.handlePressHanged}
+       handlePressMemory={this.handlePressMemory}
       _toggleBottomNavigationView={this._toggleBottomNavigationView}
       ></GamesHomeTemplate>
     )

@@ -26,12 +26,16 @@ export const GamesHomeTemplate = props => {
                     <View style={[sG.w_100, sG.row_40, sG.ai_center, sG.jc_center]}>
                         <TouchableOpacity style={[sG.w_90, sG.h_80, sG.ai_center, sG.jc_center, sG.brounded]} onPress={props.handlePressHanged}>
                             <ImageBackground resizeMode='cover' source={require('../../../../assets/hangman.jpg')} style={[sG.h_100, sG.w_100, sG.ai_center, sG.jc_center]}>
-                                <View style={[sG.w_90, sG.h_80]}>
-                                    <Text style={[sG.h5, sG.text_secondary, sG.bold]}>Hangman</Text>
-                                </View>
                             </ImageBackground>
                         </TouchableOpacity>
-                    </View>
+                    </View> 
+                    
+                    <View style={[sG.w_100, sG.row_40, sG.ai_center, sG.jc_center]}>
+                        <TouchableOpacity style={[sG.w_90, sG.h_80, sG.ai_center, sG.jc_center, sG.brounded]} onPress={props.handlePressMemory}>
+                            <ImageBackground resizeMode='cover' source={require('../../../../assets/memory.png')} style={[sG.h_100, sG.w_100, sG.ai_center, sG.jc_center]}>
+                            </ImageBackground>
+                        </TouchableOpacity>
+                    </View> 
                 </ScrollView>
             </View>
 

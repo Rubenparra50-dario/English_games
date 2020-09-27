@@ -10,6 +10,7 @@ import Home from './src/screens/containers/home/home';
 import DictionaryHome from './src/screens/containers/dictionary/dictionaryHome';
 import ProfileHome from './src/screens/containers/profile/profileHome';
 import Hanged from './src/screens/containers/games/hanged/hanged';
+import Memory from './src/screens/containers/games/memory/memory';
 import GamesHome from './src/screens/containers/games/gamesHome';
 
 import Example from "./screens/Example";
@@ -87,6 +88,21 @@ const HomeStackNavigator=  createStackNavigator({
     screen: Hanged,
     navigationOptions: ({navigation}) => ({
       title: 'Hangman',
+      headerStyle: {
+        backgroundColor: '#5271ff',
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    })
+  },
+  Memory:{
+    screen: Memory,
+    navigationOptions: ({navigation}) => ({
+      title: 'Memory',
       headerStyle: {
         backgroundColor: '#5271ff',
         borderBottomLeftRadius: 20,
