@@ -1,6 +1,6 @@
 import React, { Component }  from "react"; 
-import { StyleSheet, Dimensions, Platform, View, Text, Image, TouchableOpacity,} from 'react-native';
-import { createAppContainer, createBottomTabNavigator, createDrawerNavigator,createStackNavigator, createSwitchNavigator} from "react-navigation";
+import { Dimensions} from 'react-native';
+import { createAppContainer,createStackNavigator, createSwitchNavigator} from "react-navigation";
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { sG } from './src/screens/components/general/styles';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; // 6.2.2
@@ -12,8 +12,9 @@ import ProfileHome from './src/screens/containers/profile/profileHome';
 import Hanged from './src/screens/containers/games/hanged/hanged';
 import Memory from './src/screens/containers/games/memory/memory';
 import GamesHome from './src/screens/containers/games/gamesHome';
-
-import Example from "./screens/Example";
+import ExamsHome from './src/screens/containers/exams/examsHome';
+import ExamsQuestions from './src/screens/containers/exams/examQuestions';
+import AudioBooksHome from './src/screens/containers/audiobooks/audioBooksHome';
 
 // define REM depending on screen width
 const entireScreenWidth = Dimensions.get('window').width;
@@ -118,6 +119,51 @@ const HomeStackNavigator=  createStackNavigator({
     screen: GamesHome,
     navigationOptions: ({navigation}) => ({
       title: 'Games',
+      headerStyle: {
+        backgroundColor: '#5271ff',
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    })
+  },
+  ExamsHome:{
+    screen: ExamsHome,
+    navigationOptions: ({navigation}) => ({
+      title: 'Exams',
+      headerStyle: {
+        backgroundColor: '#5271ff',
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    })
+  },
+  ExamsQuestions:{
+    screen: ExamsQuestions,
+    navigationOptions: ({navigation}) => ({
+      title: 'Exam Questions',
+      headerStyle: {
+        backgroundColor: '#5271ff',
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    })
+  },
+  AudioBooksHome:{
+    screen: AudioBooksHome,
+    navigationOptions: ({navigation}) => ({
+      title: 'Audiobooks',
       headerStyle: {
         backgroundColor: '#5271ff',
         borderBottomLeftRadius: 20,

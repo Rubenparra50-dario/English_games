@@ -3,11 +3,12 @@ import {View, Text, ImageBackground, TouchableOpacity, ScrollView} from 'react-n
 import { MaterialCommunityIcons,Entypo } from '@expo/vector-icons';
 import { sG } from '../../components/general/styles';
 import { BottomSheet } from 'react-native-btr';
+import Carousel from 'react-native-snap-carousel';
 
 
 const url="../../../../assets/boardingGames.png";
 
-export const GamesHomeTemplate = props => {
+export const AudioBooksHomeTemplate = props => {
 
     return (
         <View style={[ sG.container, sG.bg_white]}>

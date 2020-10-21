@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import {HangedTemplate} from '../../../template/games/hanged/hanged';
 import { AsyncStorage } from 'react-native';
-import { Notifications } from 'expo';
-import * as Permissions from 'expo-permissions';
-import Constants from 'expo-constants';
 
 
 export default class Hanged extends Component {
@@ -23,7 +20,6 @@ export default class Hanged extends Component {
       modalVisible: false,
       resultado: '',
       cantidadGamesFinalized:'',
-      expoPushToken:'',
     }
   }
 
@@ -106,41 +102,14 @@ export default class Hanged extends Component {
     await AsyncStorage.setItem('GamesFinalized', ''+cantidadGamesFinalized);
   };
 
-  pushGamesFinalizedActually = async () => {        
+  pushGamesFinalizedActually = async () => {       
     this.setState({
       cantidadGamesFinalized: await AsyncStorage.getItem('GamesFinalized')
     });
   };
 
-  getExpoPushToken = async () => {        
-    this.setState({
-      expoPushToken: await AsyncStorage.getItem('expoPushToken')
-    });
-    console.log('ewyyy: '+await AsyncStorage.getItem('expoPushToken'))
-  };
-
-  sendNotification = async () => {
-    const message = {
-      to: this.state.expoPushToken,
-      sound: 'default',
-      title: 'Congratulations!',
-      body: 'You have won a new game.',
-    };
-
-    await fetch('https://exp.host/--/api/v2/push/send', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Accept-encoding': 'gzip, deflate',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(message),
-    });
-  };
-
   componentDidMount () {
     this.pushGamesFinalizedActually();
-    this.getExpoPushToken();
   }
 
   componentDidUpdate(){
@@ -159,7 +128,6 @@ export default class Hanged extends Component {
         numAciertos: 0
       });
       this.pushGamesFinalized(parseInt(this.state.cantidadGamesFinalized)+1);
-      this.sendNotification();
     }
   }
 

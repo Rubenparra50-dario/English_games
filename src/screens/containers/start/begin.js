@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {SwiperBeginTemplate} from '../../template/start/begin';
+import { AsyncStorage } from 'react-native';
 
 export default class SwiperBegin extends Component {
 
@@ -9,6 +10,7 @@ export default class SwiperBegin extends Component {
       animating: false,
       alignsecond: false,
       status:1,
+      cantidadGamesFinalized:'0',
     };
 
     setTimeout(
@@ -32,7 +34,15 @@ export default class SwiperBegin extends Component {
   handlePress = () => {
       this.props.navigation.navigate('Instructors')
   }
+
+  pushGamesFinalized = async () => {
+    await AsyncStorage.setItem('GamesFinalized', ''+this.state.cantidadGamesFinalized);
+  };
 //--------------------- fin sección de eventos de botones ------------------------
+
+  componentDidMount () {
+    this.pushGamesFinalized();
+  }
 
   render () {
     return (

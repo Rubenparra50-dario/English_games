@@ -57,10 +57,12 @@ export const ProfileHomeTemplate = props => {
     return (
       <View style={[ sG.container, sG.bg_white]}>
         {props.alignsecond?null:(
-          <View style={[sG.h_100, sG.w_100, sG.ai_center, sG.jc_center]}>
-            <ImageBackground source={require(url)} style={[sG.container, sG.w_100, sG.ai_center, sG.jc_center]}>
-            </ImageBackground>
-          </View>
+            <View style={[sG.h_100, sG.w_100, sG.ai_center, sG.jc_center]}>
+                <ImageBackground resizeMode='contain' style={[sG.w_50, sG.h_40]} source={require('../../../../assets/gif/loading.gif')} />
+                <View style={[sG.w_90, sG.h_10, sG.ai_center, sG.jc_center]}>
+                        <Text style={[sG.text_primary, sG.h5, sG.text_center, sG.bold]}>Loading ...</Text>
+                </View>
+            </View>
         )}
 
         {!props.alignsecond ? null : (
@@ -98,7 +100,7 @@ export const ProfileHomeTemplate = props => {
                                 <ImageBackground resizeMode='contain' style={[sG.w_80, sG.h_80]} source={require('../../../../assets/icono_menu_dictionary.png')}/>
                             </View> 
                             <View style={[sG.w_90, sG.h_20, sG.ai_center, sG.jc_center]}>
-                                <Text style={[sG.h8, sG.text_primary, sG.bold]}>Dictionary (1)</Text>
+                                <Text style={[sG.h8, sG.text_primary, sG.bold]}>Dictionary ({props.cantidadVisitasDictionary})</Text>
                             </View> 
                         </View>   
 
@@ -107,7 +109,7 @@ export const ProfileHomeTemplate = props => {
                                 <ImageBackground resizeMode='contain' style={[sG.w_80, sG.h_80]} source={require('../../../../assets/exam.png')}/>
                             </View> 
                             <View style={[sG.w_90, sG.h_20, sG.ai_center, sG.jc_center]}>
-                                <Text style={[sG.h8, sG.text_primary, sG.bold]}>Exams (1)</Text>
+                                <Text style={[sG.h8, sG.text_primary, sG.bold]}>Exams ()</Text>
                             </View> 
                         </View>  
 

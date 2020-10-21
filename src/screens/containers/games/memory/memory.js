@@ -3,9 +3,6 @@ import {MemoryTemplate} from '../../../template/games/memory/memory';
 import { AsyncStorage, View, Text, TouchableOpacity } from 'react-native';
 import { Ionicons, FontAwesome, Entypo } from '@expo/vector-icons';
 import Card from '../../../components/games/memory/Card';
-import { Notifications } from 'expo';
-import * as Permissions from 'expo-permissions';
-import Constants from 'expo-constants';
 import { sG } from '../../../components/general/styles';
 import {cards} from '../../../components/apis/games/apiCards';
 

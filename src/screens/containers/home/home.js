@@ -11,6 +11,7 @@ export default class Home extends Component {
       alignsecond: false,
       status:1,
       id_avatar:'',
+      cantidadGamesFinalized:'',
     };
   }
 
@@ -25,8 +26,16 @@ export default class Home extends Component {
       this.props.navigation.navigate('DictionaryHome')
   }
 
+  handlePressExamsHome = () => {
+    this.props.navigation.navigate('ExamsHome')
+  }
+
   handlePressGamesHome = () => {
     this.props.navigation.navigate('GamesHome')
+  }
+
+  handlePressAudioBooksHome = () => {
+    this.props.navigation.navigate('AudioBooksHome')
   }
   
   handlePressProfile = async () => {
@@ -44,6 +53,12 @@ export default class Home extends Component {
         id_avatar: await AsyncStorage.getItem('id_avatar')
     });
   };
+
+  gethGamesFinalizedActually = async () => {        
+      this.setState({
+        cantidadGamesFinalized: await AsyncStorage.getItem('GamesFinalized')
+      });
+  };
 //--------------------- fin sección de eventos de botones ------------------------
 
   componentDidMount() {
@@ -52,7 +67,8 @@ export default class Home extends Component {
     //Adding an event listner om focus
     //So whenever the screen will have focus it will set the state to zero
     this.focusListener = navigation.addListener('willFocus', () => {
-      this.getIdAvatar()
+      this.getIdAvatar(),
+      this.gethGamesFinalizedActually()
     });
   }
 
@@ -69,10 +85,13 @@ export default class Home extends Component {
       alignsecond={this.state.alignsecond}
       status={this.state.status}
       id_avatar={this.state.id_avatar}
+      cantidadGamesFinalized={this.state.cantidadGamesFinalized}
 
       handlePressGamesHome={this.handlePressGamesHome}
       handlePressDictionary={this.handlePressDictionary}
       handlePressProfile={this.handlePressProfile}
+      handlePressExamsHome={this.handlePressExamsHome}
+      handlePressAudioBooksHome={this.handlePressAudioBooksHome}
       ></HomeTemplate>
     )
   }

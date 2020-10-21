@@ -6,6 +6,7 @@ import { ListIrregularVerbs } from '../../components/apis/dictionary/apiIrregula
 import { ListPronouns } from '../../components/apis/dictionary/apiPronounList';
 import { ListPrepositionsOfPlace } from '../../components/apis/dictionary/apiPrepositionsOfPlaceList';
 import { ListPrepositionsOfTime } from '../../components/apis/dictionary/apiPrepositionsOfTimeList';
+import { AsyncStorage } from 'react-native';
 
 const percent_per_element = 40;
 const num_items = 5;
@@ -21,6 +22,7 @@ export default class DictionaryHome extends Component {
         idCategory:1,
         data_categories : [],
         data_response: ListRegularVerbs,
+        cantidadVisitasDictionary:'',
     };
 
     setTimeout(
@@ -77,10 +79,18 @@ export default class DictionaryHome extends Component {
     _toggleBottomNavigationView = () => {
     this.setState({ visible: !this.state.visible });
     };
+  
+    pushcantidadVisitasDictionaryActually = async () => {      
+      let cant = await AsyncStorage.getItem('cantidadVisitasDictionary')
+      let acum = parseInt(cant)+1;
+      await AsyncStorage.setItem('cantidadVisitasDictionary', ''+acum);
+    };
+
 //--------------------- fin sección de eventos de botones ------------------------
 
     componentDidMount (){
-        this.AsignarCategorias();
+        this.AsignarCategorias(),
+        this.pushcantidadVisitasDictionaryActually()
     }
 
   render () {

@@ -64,7 +64,7 @@ export const HomeTemplate = props => {
                                     {AvatarList.slice(props.id_avatar-1,props.id_avatar).map((item, key) =>(
                                     <Text style={[sG.text_white, sG.bold, sG.h6]}>{item.nombre}</Text>    
                                     ))}    
-                                    <Text style={[sG.text_white, sG.h7]}>Games finished: 0</Text>
+                                    <Text style={[sG.text_white, sG.h7]}>Games finished: {props.cantidadGamesFinalized}</Text>
                                     <Text style={[sG.text_white, sG.h7]}>Exams completed: 0</Text>
                                 </View>
                             </View>
@@ -115,7 +115,7 @@ export const HomeTemplate = props => {
                     <View style={[sG.h_90, sG.w_10, sG.jc_center]}>
                         <MaterialCommunityIcons name="circle-slice-5" style={[sG.size_icon, sG.text_white]} />
                     </View>
-                    <TouchableOpacity style={[sG.h_90, sG.w_80, sG.ai_center, sG.jc_center, sG.brounded, sG.bg_white, sG.chrow]}>
+                    <TouchableOpacity style={[sG.h_90, sG.w_80, sG.ai_center, sG.jc_center, sG.brounded, sG.bg_white, sG.chrow]} onPress={props.handlePressExamsHome}>
                         <View style={[sG.h_90, sG.w_25, sG.ai_center, sG.jc_center]}>
                             <ImageBackground resizeMode='contain' style={[sG.w_80, sG.h_80]} source={require('../../../../assets/exam.png')}/>
                         </View>
@@ -132,7 +132,7 @@ export const HomeTemplate = props => {
                     <View style={[sG.h_90, sG.w_10, sG.jc_center]}>
                         <MaterialCommunityIcons name="circle-slice-6" style={[sG.size_icon, sG.text_white]} />
                     </View>
-                    <TouchableOpacity style={[sG.h_90, sG.w_80, sG.ai_center, sG.jc_center, sG.brounded, sG.bg_white, sG.chrow]}>
+                    <TouchableOpacity style={[sG.h_90, sG.w_80, sG.ai_center, sG.jc_center, sG.brounded, sG.bg_white, sG.chrow]} onPress={props.handlePressAudioBooksHome}>
                         <View style={[sG.h_90, sG.w_25, sG.ai_center, sG.jc_center]}>
                             <ImageBackground resizeMode='contain' style={[sG.w_80, sG.h_80]} source={require('../../../../assets/book_audio.png')}/>
                         </View>

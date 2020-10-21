@@ -7,7 +7,7 @@ import { BottomSheet } from 'react-native-btr';
 
 const url="../../../../assets/boardingGames.png";
 
-export const GamesHomeTemplate = props => {
+export const ExamsHomeTemplate = props => {
 
     return (
         <View style={[ sG.container, sG.bg_white]}>
@@ -25,18 +25,45 @@ export const GamesHomeTemplate = props => {
                 
             <View style={[sG.w_100, sG.h_80, sG.ai_center, sG.jc_center]}>
                 <ScrollView>
-                    <View style={[sG.w_100, sG.row_40, sG.ai_center, sG.jc_center]}>
-                        <TouchableOpacity style={[sG.w_90, sG.h_80, sG.ai_center, sG.jc_center, sG.brounded]} onPress={props.handlePressHanged}>
-                            <ImageBackground resizeMode='cover' source={require('../../../../assets/hangman.jpg')} style={[sG.h_100, sG.w_100, sG.ai_center, sG.jc_center]}>
-                            </ImageBackground>
-                        </TouchableOpacity>
+                    <View style={[sG.w_100, sG.row_60, sG.ai_center, sG.jc_center, sG.chrow]}>
+                        <View style={[sG.w_50, sG.h_100, sG.ai_center, sG.jc_center]}>
+                            <TouchableOpacity style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded]} onPress={props.handlePressAnimals}>
+                                <ImageBackground resizeMode='cover' source={require('../../../../assets/exams/examAnimals.png')} style={[sG.h_100, sG.w_100, sG.ai_center, sG.jc_center]}>
+                                </ImageBackground>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={[sG.w_50, sG.h_100, sG.ai_center, sG.jc_center]}>
+                            <TouchableOpacity style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded]} onPress={props.handlePressOccupations}>
+                                <ImageBackground resizeMode='cover' source={require('../../../../assets/exams/examOccupations.png')} style={[sG.h_100, sG.w_100, sG.ai_center, sG.jc_center]}>
+                                </ImageBackground>
+                            </TouchableOpacity>
+                        </View>
                     </View> 
-                    
-                    <View style={[sG.w_100, sG.row_40, sG.ai_center, sG.jc_center]}>
-                        <TouchableOpacity style={[sG.w_90, sG.h_80, sG.ai_center, sG.jc_center, sG.brounded]} onPress={props.handlePressMemory}>
-                            <ImageBackground resizeMode='cover' source={require('../../../../assets/memory.png')} style={[sG.h_100, sG.w_100, sG.ai_center, sG.jc_center]}>
-                            </ImageBackground>
-                        </TouchableOpacity>
+                    <View style={[sG.w_100, sG.row_60, sG.ai_center, sG.jc_center, sG.chrow]}>
+                        <View style={[sG.w_50, sG.h_100, sG.ai_center, sG.jc_center]}>
+                            <TouchableOpacity style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded]} onPress={props.handlePressFood}>
+                                <ImageBackground resizeMode='cover' source={require('../../../../assets/exams/examFood.png')} style={[sG.h_100, sG.w_100, sG.ai_center, sG.jc_center]}>
+                                </ImageBackground>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={[sG.w_50, sG.h_100, sG.ai_center, sG.jc_center]}>
+                            <TouchableOpacity style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded]} onPress={props.handlePressPlaces}>
+                                <ImageBackground resizeMode='cover' source={require('../../../../assets/exams/examPlaces.png')} style={[sG.h_100, sG.w_100, sG.ai_center, sG.jc_center]}>
+                                </ImageBackground>
+                            </TouchableOpacity>
+                        </View>
+                    </View> 
+                    <View style={[sG.w_100, sG.row_60, sG.ai_center, sG.jc_center, sG.chrow]}>
+                        <View style={[sG.w_50, sG.h_100, sG.ai_center, sG.jc_center]}>
+                            <TouchableOpacity style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded]} onPress={props.handlePressRoutines}>
+                                <ImageBackground resizeMode='cover' source={require('../../../../assets/exams/examRoutines.png')} style={[sG.h_100, sG.w_100, sG.ai_center, sG.jc_center]}>
+                                </ImageBackground>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={[sG.w_50, sG.h_100, sG.ai_center, sG.jc_center]}>
+                            <View style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded]}>
+                            </View>
+                        </View>
                     </View> 
                 </ScrollView>
             </View>
@@ -66,12 +93,12 @@ export const GamesHomeTemplate = props => {
                     <View style={[sG.bg_white, sG.w_100, sG.h_50, sG.jc_center, sG.ai_center,sG.brounded_top]}>
                         <View style={[sG.h_60, sG.w_100, sG.ai_center, sG.jc_center, sG.chrow]}>
                             <View style={[sG.h_90, sG.w_30, sG.ai_center, sG.jc_center]}>
-                                <ImageBackground resizeMode='contain' style={[sG.w_100, sG.h_100]} source={require('../../../../assets/help1.png')} />
+                                <ImageBackground resizeMode='contain' style={[sG.w_100, sG.h_100]} source={require('../../../../assets/help2.png')} />
                             </View>
                             <View style={[sG.h_90, sG.w_60, sG.ai_center, sG.jc_center]}>
                                 <View style={[sG.h_90, sG.w_90, sG.ai_center, sG.jc_center, sG.border, sG.brounded]}>
                                     <View style={[sG.h_90, sG.w_90, sG.ai_center, sG.jc_center]}>
-                                        <Text style={[sG.h6, sG.text_primary]}>En este módulo encontrarás algunos juegos para poner a prueba tus capacidades.{'\n'}¡juega ahora!</Text>
+                                        <Text style={[sG.h6, sG.text_primary]}>En este módulo encontrarás algunos exámenes para poner a prueba tus capacidades.{'\n'}¡Ingresa ahora!</Text>
                                     </View>
                                 </View>
                             </View>
@@ -79,7 +106,7 @@ export const GamesHomeTemplate = props => {
                         <View style={[sG.h_40, sG.w_100, sG.ai_center, sG.jc_center, sG.chrow]}>
                             <View style={[sG.h_90, sG.w_70, sG.ai_center, sG.jc_center, sG.border, sG.brounded]}>
                                 <View style={[sG.h_90, sG.w_90, sG.ai_center, sG.jc_center]}>
-                                    <Text style={[sG.h6, sG.text_primary]}>In this module you will find some games to test your abilities.{'\n'}Play now!</Text>
+                                    <Text style={[sG.h6, sG.text_primary]}>In this module you will find some exams to test your abilities.{'\n'}Enter now!</Text>
                                 </View>
                             </View>
                             <TouchableOpacity style={[sG.h_90, sG.w_20, sG.ai_center, sG.jc_end]} onPress={props._toggleBottomNavigationView}>

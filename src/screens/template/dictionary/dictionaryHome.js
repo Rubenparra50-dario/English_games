@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, ImageBackground, TouchableOpacity, ScrollView, ActivityIndicator} from 'react-native';
+import {View, Text, ImageBackground, TouchableOpacity, ScrollView, ActivityIndicator, Image} from 'react-native';
 import { MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 import { sG } from '../../components/general/styles';
 import { BottomSheet } from 'react-native-btr';
@@ -12,8 +12,10 @@ export const DictionaryHomeTemplate = props => {
       <View style={[ sG.container, sG.bg_white]}>
         {props.alignsecond?null:(
           <View style={[sG.h_100, sG.w_100, sG.ai_center, sG.jc_center]}>
-            <ImageBackground source={require(url)} style={[sG.container, sG.w_100, sG.ai_center, sG.jc_center]}>
-            </ImageBackground>
+              <ImageBackground resizeMode='contain' style={[sG.w_50, sG.h_40]} source={require('../../../../assets/gif/loading.gif')} />
+              <View style={[sG.w_90, sG.h_10, sG.ai_center, sG.jc_center]}>
+                    <Text style={[sG.text_primary, sG.h5, sG.text_center, sG.bold]}>Loading ...</Text>
+              </View>
           </View>
         )}
 
@@ -46,7 +48,7 @@ export const DictionaryHomeTemplate = props => {
                                 {props.idCategory===item.id?
                                 <Text style={[sG.bold, sG.h7, sG.text_center, sG.text_green_light]}>{item.nombre}</Text>
                                 :
-                                <Text style={[sG.bold, sG.h7, sG.text_center]}>{item.nombre}</Text>
+                                <Text style={[sG.bold, sG.h7, sG.text_center, sG.text_primary]}>{item.nombre}</Text>
                                 }
                             </View>
                         </View>

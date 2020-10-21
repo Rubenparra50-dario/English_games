@@ -15,9 +15,6 @@
       "resizeMode": "cover",
       "backgroundColor": "#5271ff"
     },
-    "notification":{
-      "icon":"./assets/icons/notification.png"
-    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -29,6 +26,7 @@
     },
     "android": {
       "versionCode": 1
-    }
+    },
+    "sdkVersion": "39.0.0"
   }
 }

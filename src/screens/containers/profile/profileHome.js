@@ -16,7 +16,8 @@ export default class ProfileHome extends Component {
         alignsecond: false,
         data_avatar : [],
         id_avatar:'',
-        cantidadGamesFinalized:'',
+        cantidadGamesFinalized:'0',
+        cantidadVisitasDictionary:'0',
     };
 
     setTimeout(
@@ -71,11 +72,18 @@ export default class ProfileHome extends Component {
       });
     };
 
+    gethcantidadVisitasDictionaryActually = async () => {        
+      this.setState({
+        cantidadVisitasDictionary: await AsyncStorage.getItem('cantidadVisitasDictionary')
+      });
+    };
+
 //--------------------- fin sección de eventos de botones ------------------------
 
     componentDidMount (){
         this.AsignarAvatars();
         this.gethGamesFinalizedActually();
+        this.gethcantidadVisitasDictionaryActually();
     }
 
   render () {
@@ -87,6 +95,7 @@ export default class ProfileHome extends Component {
       alignsecond={this.state.alignsecond}
       id_avatar={this.state.id_avatar}
       cantidadGamesFinalized={this.state.cantidadGamesFinalized}
+      cantidadVisitasDictionary={this.state.cantidadVisitasDictionary}
 
       handlePressCategory={this.handlePressCategory}
       _toggleBottomNavigationView={this._toggleBottomNavigationView}
