@@ -15,6 +15,7 @@ import GamesHome from './src/screens/containers/games/gamesHome';
 import ExamsHome from './src/screens/containers/exams/examsHome';
 import ExamsQuestions from './src/screens/containers/exams/examQuestions';
 import AudioBooksHome from './src/screens/containers/audiobooks/audioBooksHome';
+import AudioBook from './src/screens/containers/audiobooks/audioBook';
 
 // define REM depending on screen width
 const entireScreenWidth = Dimensions.get('window').width;
@@ -164,6 +165,21 @@ const HomeStackNavigator=  createStackNavigator({
     screen: AudioBooksHome,
     navigationOptions: ({navigation}) => ({
       title: 'Audiobooks',
+      headerStyle: {
+        backgroundColor: '#5271ff',
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    })
+  },
+  AudioBook:{
+    screen: AudioBook,
+    navigationOptions: ({navigation}) => ({
+      title: 'Audiobook',
       headerStyle: {
         backgroundColor: '#5271ff',
         borderBottomLeftRadius: 20,

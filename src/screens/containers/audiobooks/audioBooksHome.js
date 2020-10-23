@@ -27,17 +27,13 @@ export default class AudioBooksHome extends Component {
 
 //--------------------- inicio sección de eventos de botones ----------------------
   
-  handlePressHanged = () => {
-      this.props.navigation.navigate('Hanged')
+  handlePress = () => {
+      this.props.navigation.navigate('AudioBook')
   }
 
-  handlePressMemory = () => {
-    this.props.navigation.navigate('Memory')
-  }
-
-    _toggleBottomNavigationView = () => {
-        this.setState({ visible: !this.state.visible });
-    };
+  _toggleBottomNavigationView = () => {
+      this.setState({ visible: !this.state.visible });
+  };
   
 
 //--------------------- fin sección de eventos de botones ------------------------
@@ -49,8 +45,7 @@ export default class AudioBooksHome extends Component {
        alignsecond={this.state.alignsecond}
        visible={this.state.visible}
 
-       handlePressHanged={this.handlePressHanged}
-       handlePressMemory={this.handlePressMemory}
+       handlePress={this.handlePress}
       _toggleBottomNavigationView={this._toggleBottomNavigationView}
       ></AudioBooksHomeTemplate>
     )

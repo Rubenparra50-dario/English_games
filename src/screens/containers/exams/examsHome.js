@@ -33,23 +33,23 @@ export default class ExamsHome extends Component {
     }
 
     handlePressAnimals = () => {
-        this.props.navigation.navigate('ExamsQuestions')
-    }
-
-    handlePressFood = () => {
-        this.props.navigation.navigate('ExamsQuestions')
+        this.props.navigation.navigate('ExamsQuestions',{tema:1})
     }
 
     handlePressOccupations = () => {
-        this.props.navigation.navigate('ExamsQuestions')
+      this.props.navigation.navigate('ExamsQuestions',{tema:2})
     }
 
+    handlePressFood = () => {
+        this.props.navigation.navigate('ExamsQuestions',{tema:3})
+    }    
+
     handlePressPlaces = () => {
-        this.props.navigation.navigate('ExamsQuestions')
+        this.props.navigation.navigate('ExamsQuestions',{tema:4})
     }
 
     handlePressRoutines = () => {
-        this.props.navigation.navigate('ExamsQuestions')
+        this.props.navigation.navigate('ExamsQuestions',{tema:5})
     }
 
     _toggleBottomNavigationView = () => {

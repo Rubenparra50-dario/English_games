@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, ImageBackground, TouchableOpacity, ScrollView} from 'react-native';
+import {View, Text, ImageBackground, TouchableOpacity, Modal} from 'react-native';
 import { Feather, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 import { sG } from '../../components/general/styles';
 import { BottomSheet } from 'react-native-btr';
@@ -61,7 +61,7 @@ export const ExamsQuestionsTemplate = props => {
                 </ImageBackground>
             </View>
         )}        
-
+ 
             <BottomSheet
                 visible={props.visible}
                 //setting the visibility state of the bottom shee
@@ -96,6 +96,49 @@ export const ExamsQuestionsTemplate = props => {
                         </View>
                     </View>
                 </BottomSheet>
+
+                {/* inicio modal final */}
+                <Modal animationType="slide" transparent={true} visible={props.show}>
+                    <View style={[sG.container, sG.ai_center, sG.jc_center]}>
+                        <View style={[sG.h_40, sG.w_80, sG.bg_white, sG.brounded, sG.ai_center, sG.jc_center, sG.card_shadow, sG.border]}>
+                        <View style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center]}>
+                            <View style={[sG.w_100, sG.h_45, sG.ai_center, sG.jc_center, sG.chrow]}>
+                                <View style={[sG.w_45, sG.h_100, sG.ai_center, sG.jc_center]}>
+                                    <Text style={[sG.h4, sG.bold, sG.text_green_light]}>Questions</Text>
+                                    <Text style={[sG.h2, sG.bold, sG.text_gray_light]}>5</Text>
+                                </View>
+                                <View style={[sG.w_45, sG.h_100, sG.ai_center, sG.jc_center]}>
+                                    <Text style={[sG.h4, sG.bold, sG.text_green_light]}>Correct</Text>
+                                    <Text style={[sG.h2, sG.bold, sG.text_gray_light]}>{props.acertadas}</Text>
+                                </View>
+                            </View>
+                            <View style={[sG.w_80, sG.h_30, sG.ai_center, sG.jc_center]}>
+                                {props.acertadas === 1?
+                                <Text style={[sG.text_gray_light, sG.text_center, sG.h5]}>your effectiveness is 20%</Text>
+                                :null}
+                                {props.acertadas === 2?
+                                <Text style={[sG.text_gray_light, sG.text_center, sG.h5]}>your effectiveness is 40%</Text>
+                                :null}
+                                {props.acertadas === 3?
+                                <Text style={[sG.text_gray_light, sG.text_center, sG.h5]}>your effectiveness is 60%</Text>
+                                :null}
+                                {props.acertadas === 4?
+                                <Text style={[sG.text_gray_light, sG.text_center, sG.h5]}>your effectiveness is 80%</Text>
+                                :null}
+                                {props.acertadas === 5?
+                                <Text style={[sG.text_gray_light, sG.text_center, sG.h5]}>your effectiveness is 100%</Text>
+                                :null}
+                            </View>
+                            <View style={[sG.w_100, sG.h_25, sG.ai_center, sG.jc_center]}>
+                                <TouchableOpacity style={[sG.w_90, sG.h_70, sG.ai_center, sG.jc_center, sG.brounded, sG.bg_green_light]} onPress={props.handlePressHome}>
+                                    <Text style={[sG.text_white, sG.text_center, sG.bold, sG.h6]}>Perfect!</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        </View>
+                    </View>
+                </Modal>
+                {/* fin modal final */}
         </View>
     )
 }
