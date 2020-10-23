@@ -27,8 +27,8 @@ export default class AudioBooksHome extends Component {
 
 //--------------------- inicio sección de eventos de botones ----------------------
   
-  handlePress = () => {
-      this.props.navigation.navigate('AudioBook')
+  handlePress = (id) => {
+      this.props.navigation.navigate('AudioBook',{tema:id})
   }
 
   _toggleBottomNavigationView = () => {

@@ -28,7 +28,7 @@ export const AudioBooksHomeTemplate = props => {
                 <ScrollView>
                     <View style={[sG.w_100, sG.row_80, sG.ai_center, sG.jc_center, sG.chrow]}>
                         <View style={[sG.w_50, sG.h_100, sG.ai_center, sG.jc_center]}>
-                            <TouchableOpacity style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded]} onPress={props.handlePress}>
+                            <TouchableOpacity style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded]} onPress={() => props.handlePress(1)}>
                                 <ImageBackground resizeMode='cover' source={require('../../../../assets/audiobooks/frog.png')} style={[sG.h_85, sG.w_100, sG.ai_center, sG.jc_center]}>
                                 </ImageBackground>
                                 <View style={[sG.h_15, sG.w_100, sG.ai_center, sG.jc_center]}>
@@ -37,7 +37,7 @@ export const AudioBooksHomeTemplate = props => {
                             </TouchableOpacity>
                         </View>
                         <View style={[sG.w_50, sG.h_100, sG.ai_center, sG.jc_center]}>
-                            <TouchableOpacity style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded]} onPress={props.handlePress}>
+                            <TouchableOpacity style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded]} onPress={() => props.handlePress(2)}>
                                 <ImageBackground resizeMode='cover' source={require('../../../../assets/audiobooks/red.png')} style={[sG.h_85, sG.w_100, sG.ai_center, sG.jc_center]}>
                                 </ImageBackground>
                                 <View style={[sG.h_15, sG.w_100, sG.ai_center, sG.jc_center]}>
@@ -48,7 +48,7 @@ export const AudioBooksHomeTemplate = props => {
                     </View> 
                     <View style={[sG.w_100, sG.row_80, sG.ai_center, sG.jc_center, sG.chrow]}>
                         <View style={[sG.w_50, sG.h_100, sG.ai_center, sG.jc_center]}>
-                            <TouchableOpacity style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded]} onPress={props.handlePress}>
+                            <TouchableOpacity style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded]} onPress={() => props.handlePress(3)}>
                                 <ImageBackground resizeMode='cover' source={require('../../../../assets/audiobooks/poor.png')} style={[sG.h_85, sG.w_100, sG.ai_center, sG.jc_center]}>
                                 </ImageBackground>
                                 <View style={[sG.h_15, sG.w_100, sG.ai_center, sG.jc_center]}>
@@ -57,7 +57,7 @@ export const AudioBooksHomeTemplate = props => {
                             </TouchableOpacity>
                         </View>
                         <View style={[sG.w_50, sG.h_100, sG.ai_center, sG.jc_center]}>
-                            <TouchableOpacity style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded]} onPress={props.handlePress}>
+                            <TouchableOpacity style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded]} onPress={() => props.handlePress(4)}>
                                 <ImageBackground resizeMode='cover' source={require('../../../../assets/audiobooks/duck.png')} style={[sG.h_85, sG.w_100, sG.ai_center, sG.jc_center]}>
                                 </ImageBackground>
                                 <View style={[sG.h_15, sG.w_100, sG.ai_center, sG.jc_center]}>
@@ -68,7 +68,7 @@ export const AudioBooksHomeTemplate = props => {
                     </View> 
                     <View style={[sG.w_100, sG.row_80, sG.ai_center, sG.jc_center, sG.chrow]}>
                         <View style={[sG.w_50, sG.h_100, sG.ai_center, sG.jc_center]}>
-                            <TouchableOpacity style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded]} onPress={props.handlePress}>
+                            <TouchableOpacity style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded]} onPress={() => props.handlePress(5)}>
                                 <ImageBackground resizeMode='cover' source={require('../../../../assets/audiobooks/aladdin.png')} style={[sG.h_85, sG.w_100, sG.ai_center, sG.jc_center]}>
                                 </ImageBackground>
                                 <View style={[sG.h_15, sG.w_100, sG.ai_center, sG.jc_center]}>
