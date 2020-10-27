@@ -11,6 +11,8 @@ export default class SwiperBegin extends Component {
       alignsecond: false,
       status:1,
       cantidadGamesFinalized:'0',
+      cantidadExamsFinalized:'0',
+      cantidadVisitasDictionary:'0',
     };
 
     setTimeout(
@@ -38,10 +40,20 @@ export default class SwiperBegin extends Component {
   pushGamesFinalized = async () => {
     await AsyncStorage.setItem('GamesFinalized', ''+this.state.cantidadGamesFinalized);
   };
+
+  pushExamsFinalized = async () => {
+    await AsyncStorage.setItem('ExamsFinalized', ''+this.state.cantidadExamsFinalized);
+  };
+
+  pushDictionariVisits= async () => {
+    await AsyncStorage.setItem('cantidadVisitasDictionary', ''+this.state.cantidadVisitasDictionary);
+  };
 //--------------------- fin sección de eventos de botones ------------------------
 
   componentDidMount () {
     this.pushGamesFinalized();
+    this.pushExamsFinalized();
+    this.pushDictionariVisits();
   }
 
   render () {

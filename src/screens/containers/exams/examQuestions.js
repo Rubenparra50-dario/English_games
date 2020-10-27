@@ -17,6 +17,7 @@ export default class ExamsQuestions extends Component {
         alignsecond: false,
         acum:1,
         show:false,
+        cantidadExamsFinalized:'',
 
         //informacion pregunta actual
         data_responses:[],
@@ -100,6 +101,7 @@ export default class ExamsQuestions extends Component {
                 }
             })
         }else{
+            this.pushExamsFinalized(parseInt(this.state.cantidadExamsFinalized)+1);
             this.setState({
                 show:true,
             })
@@ -107,8 +109,19 @@ export default class ExamsQuestions extends Component {
     }
 //++++++++++++++++++++++ fib lógica preguntas +++++++++++++++++++++++
 
+    pushExamsFinalized = async (cantidadExamsFinalized) => {
+        await AsyncStorage.setItem('ExamsFinalized', ''+cantidadExamsFinalized);
+    };
+
+    pushExamsFinalizedActually = async () => {       
+        this.setState({
+            cantidadExamsFinalized: await AsyncStorage.getItem('ExamsFinalized')
+        });
+    };
+
     componentDidMount () {
-        this.getQuestions()
+        this.getQuestions();
+        this.pushExamsFinalizedActually();
     }
 
   render () {

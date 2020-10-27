@@ -65,7 +65,7 @@ export const HomeTemplate = props => {
                                     <Text style={[sG.text_white, sG.bold, sG.h6]}>{item.nombre}</Text>    
                                     ))}    
                                     <Text style={[sG.text_white, sG.h7]}>Games finished: {props.cantidadGamesFinalized}</Text>
-                                    <Text style={[sG.text_white, sG.h7]}>Exams completed: 0</Text>
+                                    <Text style={[sG.text_white, sG.h7]}>Exams completed: {props.cantidadExamsFinalized}</Text>
                                 </View>
                             </View>
                         </ImageBackground>

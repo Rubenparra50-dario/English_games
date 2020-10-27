@@ -18,6 +18,7 @@ export default class ProfileHome extends Component {
         id_avatar:'',
         cantidadGamesFinalized:'0',
         cantidadVisitasDictionary:'0',
+        cantidadExamsFinalized:'0',
     };
 
     setTimeout(
@@ -78,12 +79,19 @@ export default class ProfileHome extends Component {
       });
     };
 
+    gethExamsFinalizedActually = async () => {        
+      this.setState({
+        cantidadExamsFinalized: await AsyncStorage.getItem('ExamsFinalized')
+      });
+    };
+
 //--------------------- fin sección de eventos de botones ------------------------
 
     componentDidMount (){
         this.AsignarAvatars();
         this.gethGamesFinalizedActually();
         this.gethcantidadVisitasDictionaryActually();
+        this.gethExamsFinalizedActually();
     }
 
   render () {
@@ -96,6 +104,7 @@ export default class ProfileHome extends Component {
       id_avatar={this.state.id_avatar}
       cantidadGamesFinalized={this.state.cantidadGamesFinalized}
       cantidadVisitasDictionary={this.state.cantidadVisitasDictionary}
+      cantidadExamsFinalized={this.state.cantidadExamsFinalized}
 
       handlePressCategory={this.handlePressCategory}
       _toggleBottomNavigationView={this._toggleBottomNavigationView}

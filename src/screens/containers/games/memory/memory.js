@@ -52,7 +52,8 @@ export default class Memory extends Component {
         current_selection: [], // this array will contain an array of card objects which are currently selected by the user. This will only contain two objects at a time.
         selected_pairs: [], // the names of the icons. This array is used for excluding them from further selection
         score: 0, // default user score
-        cards: this.cards // the shuffled cards
+        cards: this.cards, // the shuffled cards
+        cantidadGamesFinalized:'',//games finaliced acumulator
         }
 
     }
@@ -173,7 +174,24 @@ export default class Memory extends Component {
             cards: cards,
             current_selection: current_selection
         });
+        if(score > 11){
+          this.pushGamesFinalized(parseInt(this.state.cantidadGamesFinalized)+1);
+        }
     }   
+
+    pushGamesFinalized = async (cantidadGamesFinalized) => {
+      await AsyncStorage.setItem('GamesFinalized', ''+cantidadGamesFinalized);
+    };
+
+    pushGamesFinalizedActually = async () => {       
+      this.setState({
+        cantidadGamesFinalized: await AsyncStorage.getItem('GamesFinalized')
+      });
+    };
+
+    componentDidMount () {
+      this.pushGamesFinalizedActually();
+    }
     
     render() {
         return (

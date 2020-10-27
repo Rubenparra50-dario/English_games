@@ -52,7 +52,7 @@ export const AudioBooksHomeTemplate = props => {
                                 <ImageBackground resizeMode='cover' source={require('../../../../assets/audiobooks/poor.png')} style={[sG.h_85, sG.w_100, sG.ai_center, sG.jc_center]}>
                                 </ImageBackground>
                                 <View style={[sG.h_15, sG.w_100, sG.ai_center, sG.jc_center]}>
-                                    <Text style={[sG.bold, sG.h7, sG.text_green_light, sG.text_center]}>The Poor Old Lady</Text>
+                                    <Text style={[sG.bold, sG.h7, sG.text_green_light, sG.text_center]}>Kiddie Cat, Higway Robber</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>

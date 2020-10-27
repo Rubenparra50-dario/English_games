@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import {Text, View, ImageBackground} from 'react-native';
+import {Text, View, ImageBackground, StyleSheet, Button, TouchableOpacity} from 'react-native';
 import { sG } from '../../components/general/styles';
 import {AudioBookTemplate} from '../../template/audiobooks/audioBook';
 import Carousel from 'react-native-snap-carousel';
+import { MaterialIcons } from '@expo/vector-icons';
+import { Audio } from 'expo-av'
+import Slider from './react-native-slider';
+
+const thumbTouchSize = { width: 50, height: 50 }
 
 export default class AudioBook extends Component {
 
@@ -12,10 +17,18 @@ export default class AudioBook extends Component {
         visible: false,
         animating: false,
         alignsecond: false,
-        status:1,
+        
         id_avatar:'',
         activeIndex:0,
         carouselItems: [],
+        uriSound:'',
+
+        //audio
+        seek: 0,
+        volume: 1,
+        isLoaded: false,
+        isBuffering: true,
+        duration: undefined,
     };
 
     setTimeout(
@@ -29,18 +42,133 @@ export default class AudioBook extends Component {
       );
   }
 
+  //inicio audio
+  _isInitialBufferingStarted = false
+  _isInitialBufferingEnded = false
+
+  _play = async () => {
+    if (!this.soundObject) {
+      this.timestamp = Date.now()
+
+      const { sound } = await Audio.Sound.createAsync(
+        {
+          uri: this.state.uriSound,
+        },
+        {
+          shouldPlay: true,
+          progressUpdateIntervalMillis: 800,
+          positionMillis: 0,
+        },
+        this._onPlaybackStatusUpdate
+      )
+
+      this.soundObject = sound
+    } else {
+      this.timestamp = Date.now()
+
+      this.soundObject.playAsync()
+    }
+  }
+
+  _pause = () => this.soundObject.pauseAsync()
+
+  _onPlaybackStatusUpdate = status => {
+    const statusTimestamp = Date.now() - this.timestamp
+
+    console.info('status ' + statusTimestamp + ': ', status)
+
+    if (this._prevStatus && !this._prevStatus.isLoaded && status.isLoaded) {
+      this.setState({ initialLoadingTimestamp: statusTimestamp })
+    }
+
+    if (!this._isInitialBufferingStarted) {
+      if (status.isBuffering) {
+        this._isInitialBufferingStarted = true
+      }
+    } else if (!this._isInitialBufferingEnded && !status.isBuffering) {
+      this.setState({ initialBufferingTimestamp: statusTimestamp })
+
+      this._isInitialBufferingEnded = true
+    }
+
+    if (
+      !this.state.initialPlayingTimestamp &&
+      this._prevStatus &&
+      !this._prevStatus.isPlaying &&
+      status.isPlaying
+    ) {
+      this.setState({ initialPlayingTimestamp: statusTimestamp })
+    }
+
+    this._prevStatus = status
+
+    if (status.isLoaded) {
+      this.setState({
+        duration: getMMSSFromMillis(status.durationMillis),
+        volume: status.volume,
+        isLoaded: status.isLoaded,
+        isPlaying: status.isPlaying,
+        playbackInstancePosition: status.positionMillis,
+        playbackInstanceDuration: status.durationMillis,
+      })
+    } else if (status.error) {
+      console.log('Status error', status.error)
+    }
+  }
+
+  _onSeekChange = async value => {
+    if (this.soundObject != null) {
+      if (!this.isSeeking) {
+        this.isSeeking = true
+      }
+      this.seek = value
+    }
+  }
+
+  _onSeekComplete = async value => {
+    if (this.soundObject != null) {
+      this.timestamp = Date.now()
+
+      await this.soundObject.setStatusAsync({
+        positionMillis: value * this.state.playbackInstanceDuration,
+      })
+
+      this.isSeeking = false
+    }
+  }
+
+  _getSeekSliderPosition = () => {
+    if (this.isSeeking) {
+      return this.seek
+    }
+
+    const { playbackInstancePosition, playbackInstanceDuration } = this.state
+
+    if (
+      this.soundObject != null &&
+      playbackInstancePosition != null &&
+      playbackInstanceDuration != null
+    ) {
+      return playbackInstancePosition / playbackInstanceDuration
+    }
+
+    return 0
+  }
+
+  //fin audio
+
     getInfo = () => {
         const tema =  this.props.navigation.getParam('tema')
         if(tema===1){
-            this.setState({carouselItems: ApiCroag,})
+            this.setState({carouselItems: ApiCroag, uriSound:'https://res.cloudinary.com/drqr9l8n4/video/upload/v1603168776/audio/Rinrin_dy4th0.mp3'})
         }else if(tema===2){
-            this.setState({carouselItems: ApiRed,})
+            this.setState({carouselItems: ApiRed, uriSound:'https://res.cloudinary.com/drqr9l8n4/video/upload/v1603594121/audio/little-red-ridinghood_hjlqgf.mp3'})
         }else if(tema===3){
-            this.setState({carouselItems: ApiPoor,})
+            this.setState({carouselItems: ApiPoor, uriSound:'https://res.cloudinary.com/drqr9l8n4/video/upload/v1603593704/audio/gatobandido_korkec.mp3'})
         }else if(tema===4){
-            this.setState({carouselItems: ApiDuck,})
+            this.setState({carouselItems: ApiDuck, uriSound:'https://media.acast.com/mamapodden/10.markiztainton/media.mp3'})
         }else if(tema===5){
-            this.setState({carouselItems: ApiAladdin,})
+            this.setState({carouselItems: ApiAladdin, uriSound:'https://media.acast.com/mamapodden/10.markiztainton/media.mp3'})
         }
     }
 
@@ -115,7 +243,30 @@ export default class AudioBook extends Component {
                         renderItem={this._renderItem}
                         onSnapToItem = { index => this.setState({activeIndex:index}) } />
                     </View>
-                    <View style={[sG.h_10, sG.w_90, sG.ai_center, sG.jc_center, sG.bg_primary]}></View>
+                    <View style={[sG.h_10, sG.w_90, sG.ai_center, sG.jc_center, sG.bg_light, sG.chrow, sG.brounded]}>
+
+                        {this.state.isPlaying ? (
+                        <TouchableOpacity style={[sG.w_20, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded, sG.bg_primary]} onPress={this._pause}>
+                            <MaterialIcons name="pause" style={[sG.size_icon, sG.text_white]} />
+                        </TouchableOpacity>
+                        ) : (
+                        <TouchableOpacity style={[sG.w_20, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded, sG.bg_primary]} onPress={this._play}>
+                            <MaterialIcons name="play-arrow" style={[sG.size_icon, sG.text_white]} />
+                        </TouchableOpacity>
+                        )}
+                        <View style={[sG.w_80, sG.h_100, sG.ai_center, sG.jc_center]}>
+                            <Slider
+                            style={[sG.w_90]}
+                            thumbStyle={styles.thumb}
+                            trackStyle={styles.track}
+                            thumbTouchSize={thumbTouchSize}
+                            onValueChange={this._onSeekChange}
+                            value={this._getSeekSliderPosition()}
+                            onSlidingComplete={this._onSeekComplete}
+                            minimumTrackTintColor="rgb(64, 224, 190)"
+                            />
+                        </View>
+                    </View>
                 </ImageBackground>
             )}
         </View>
@@ -300,87 +451,57 @@ const ApiPoor =[
     },
     {
         imagePrincipal:"",
+        imageSecundaria:require('../../../../assets/audiobooks/poor.png'),
+        title:"",
+         text: "Kiddie cat Michin tells his room:"+'\n'+"'i'm now a higway robber, and anyone who tries to stop me will be killed on the spot. From Pop i stole dagger and pistols, and i'm ready to hold up and whack people."+'\n'+"This is the last time you'll see me in this house.",
+    },
+    {
+        imagePrincipal:"",
         imageSecundaria:require('../../../../assets/audiobooks/poor/poor1.png'),
         title:"",
-         text: "Once upon a time there was an old lady With nothing to eat, But meat, fruit, sweets, Cakes, eggs, bread and fish.",
+        text: "Once up in the hills, Michin meets up with a rooster and practices his i'm on the bird:"+'\n'+"The shot thunders in the woods, stubs Michin's right paw and scorches his whiskers. Still, the rooster gets it's neck broken.",
     },
     {
         imagePrincipal:"",
         imageSecundaria:require('../../../../assets/audiobooks/poor/poor2.png'),
         title:"",
-        text: "She drank broth, chocolate, Milk, wine, tea and coffee, And the poor woman could not find What to eat or what to drink.",
+        text: "Then, hungry as hell, our boy climbs a tree to rob an owl's nest, arouses her rage and breaks the branch that supports him high above ground: Clank!, Cowboy and dangger fly off and the owl's shrieks hurt his ears as the prodigal wannabe robber rolls and screams plummeting to the hard rocky ground.",
     },
     {
         imagePrincipal:"",
         imageSecundaria:require('../../../../assets/audiobooks/poor/poor3.png'),
         title:"",
-        text: "And this old woman did not have Not a little hut in where to live But a large house With its vegetables plot and its garden",
+        text: "Once composed from his mishap, he meets another cat and holds him up at gunpoint, saying:"+'\n'+"'Hey, little bro: your purse or your life!, Not bullied, the other screams back: 'Put up your arms, thief!''",
     },
     {
         imagePrincipal:"",
         imageSecundaria:require('../../../../assets/audiobooks/poor/poor4.png'),
         title:"",
-        text: "No one, nobody cared for her But Andrés and Juan Gil And eight servants and two pages with livery and bow-tie.",
+        text: "Michins's pistol backfires and he's almost abilaterated by the ensuing confusion.",
     },
     {
         imagePrincipal:"",
         imageSecundaria:require('../../../../assets/audiobooks/poor/poor5.png'),
         title:"",
-        text: "She never had anything to sit on But chairs and sofas With benches and cushions And springs on the back.",
+        text: "On another sojourn our hero meets a dog armed to the teeth, a well-known highway bandit, and approaches him with tact and exquisite manners:"+'\n'+"'Pal, lets celebrate our alliance with mirth, brandy and dance...'"+'\n'+"Until Michin nearly passes out while scratching his belly. 'Sure thing, chum', says the dog, 'Lets put our earnings together and bury them in a safe place.'",
     },
     {
         imagePrincipal:"",
         imageSecundaria:require('../../../../assets/audiobooks/poor/poor6.png'),
         title:"",
-        text: "Not another bed than a big one More golden than an altar, With soft feather mattress A lot of silk and a lot of frills.",
+        text: "While counting the money, a dispute arises, followed by screamed threats and slurs until the dog grabs a big stick with both paws and beats his accomplice nearly to death."+'\n'+"Countesy of the morning dew, Michin regains his senses, though lame, half blind, penniless and hungry as hell.",
     },
     {
         imagePrincipal:"",
         imageSecundaria:require('../../../../assets/audiobooks/poor/poor7.png'),
         title:"",
-        text: "And this poor old lady Every year, until her end, She had one more year of age And one year less to live.",
+        text: "And while his rival exits with guffawing barks, Michin's ears flop sadly, tail between his haunches crying over so much bad luck."+'\n'+"He picks up his hat and bracing the burning heat, step by returns home with humble and countries airs, to beg Mom.",
     },
     {
         imagePrincipal:"",
-        imageSecundaria:require('../../../../assets/audiobooks/poor/poor8.png'),
+        imageSecundaria:require('../../../../assets/audiobooks/poor/poor7.png'),
         title:"",
-        text: "And when looking herself in the mirror, It always scared her there Another old lady with glasses, Little hat and a toupee.",
-    },
-    {
-        imagePrincipal:"",
-        imageSecundaria:require('../../../../assets/audiobooks/poor/poor9.png'),
-        title:"",
-        text: "And this poor old lady Did not have what to dress, But dresses of thousand styles And of thousand and thousand fabrics.",
-    },
-    {
-        imagePrincipal:"",
-        imageSecundaria:require('../../../../assets/audiobooks/poor/poor10.png'),
-        title:"",
-        text: "And if not for his shoes, Flip-flops, boots and booties, Barefoot on the floor was walking this wretch.",
-    },
-    {
-        imagePrincipal:"",
-        imageSecundaria:require('../../../../assets/audiobooks/poor/poor11.png'),
-        title:"",
-        text: "Appetite never had When finishing eating, Nor enjoyed complete health, When she was unwell.",
-    },
-    {
-        imagePrincipal:"",
-        imageSecundaria:require('../../../../assets/audiobooks/poor/poor6.png'),
-        title:"",
-        text: "She died of wrinkle disease, Already bent like a three, And never complained again Neither of hunger nor of thirst.",
-    },
-    {
-        imagePrincipal:"",
-        imageSecundaria:require('../../../../assets/audiobooks/poor/poor13.png'),
-        title:"",
-        text: "And this poor old lady When she died, she left no more, But money, jewels, lands, houses, Eight cats and a turpial bird.",
-    },
-    {
-        imagePrincipal:"",
-        imageSecundaria:require('../../../../assets/audiobooks/poor/poor4.png'),
-        title:"",
-        text: "Rest in peace, and God allowsThat we could enjoy The poverty of that poor woman And die as bad as she did.",
+        text: "'I confess to my great sins and willing to pay for them."+'\n'+"I swear not to be bad again."+'\n'+"Beat me upif you will, mamita, but please give me something of eat!'",
     },
     {
         imagePrincipal:"",
@@ -515,3 +636,48 @@ const ApiAladdin =[
         text: "",
     },
 ]
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: 'rgb(249,250,252)',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+  
+    slider: {
+      alignSelf: 'center',
+      width: 315,
+      bottom: 0,
+    },
+  
+    thumb: {
+      backgroundColor: 'rgb(255 ,255 ,255)',
+      shadowColor: 'rgba(0,0,0,0.18)',
+      shadowOffset: { height: 10, width: 2 },
+      shadowOpacity: 0.4,
+      shadowRadius: 12,
+    },
+  
+    track: {
+      backgroundColor: 'rgb(235, 235, 235)',
+    },
+  })
+  
+  function getMMSSFromMillis(millis) {
+    const totalSeconds = millis / 1000
+    const seconds = Math.floor(totalSeconds % 60)
+    const minutes = Math.floor(totalSeconds / 60)
+  
+    return padWithZero(minutes) + ':' + padWithZero(seconds)
+  
+    function padWithZero(number) {
+      const string = number.toString()
+  
+      if (number < 10) {
+        return '0' + string
+      }
+  
+      return string
+    }
+  }

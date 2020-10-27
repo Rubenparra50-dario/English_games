@@ -109,7 +109,7 @@ export const ProfileHomeTemplate = props => {
                                 <ImageBackground resizeMode='contain' style={[sG.w_80, sG.h_80]} source={require('../../../../assets/exam.png')}/>
                             </View> 
                             <View style={[sG.w_90, sG.h_20, sG.ai_center, sG.jc_center]}>
-                                <Text style={[sG.h8, sG.text_primary, sG.bold]}>Exams ()</Text>
+                                <Text style={[sG.h8, sG.text_primary, sG.bold]}>Exams ({props.cantidadExamsFinalized})</Text>
                             </View> 
                         </View>  
 
