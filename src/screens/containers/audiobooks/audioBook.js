@@ -166,9 +166,9 @@ export default class AudioBook extends Component {
         }else if(tema===3){
             this.setState({carouselItems: ApiPoor, uriSound:'https://res.cloudinary.com/drqr9l8n4/video/upload/v1603593704/audio/gatobandido_korkec.mp3'})
         }else if(tema===4){
-            this.setState({carouselItems: ApiDuck, uriSound:'https://media.acast.com/mamapodden/10.markiztainton/media.mp3'})
+            this.setState({carouselItems: ApiDuck, uriSound:'https://res.cloudinary.com/drqr9l8n4/video/upload/v1603805754/audio/uglyduck_uliue9.mp3'})
         }else if(tema===5){
-            this.setState({carouselItems: ApiAladdin, uriSound:'https://media.acast.com/mamapodden/10.markiztainton/media.mp3'})
+            this.setState({carouselItems: ApiAladdin, uriSound:'https://res.cloudinary.com/drqr9l8n4/video/upload/v1603857152/audio/aladin_froawv.mp3'})
         }
     }
 
