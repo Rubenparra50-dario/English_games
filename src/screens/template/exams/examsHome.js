@@ -75,6 +75,20 @@ export const ExamsHomeTemplate = props => {
                             </TouchableOpacity>
                         </View>
                         <View style={[sG.w_50, sG.h_100, sG.ai_center, sG.jc_center]}>
+                            <TouchableOpacity style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded]} onPress={props.handlePressWritingPlace}>
+                                <ImageBackground resizeMode='cover' source={require('../../../../assets/exams/writingPlaces.png')} style={[sG.h_100, sG.w_100, sG.ai_center, sG.jc_center]}>
+                                </ImageBackground>
+                            </TouchableOpacity>
+                        </View>
+                    </View> 
+                    <View style={[sG.w_100, sG.row_60, sG.ai_center, sG.jc_center, sG.chrow]}>
+                        <View style={[sG.w_50, sG.h_100, sG.ai_center, sG.jc_center]}>
+                            <TouchableOpacity style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded]} onPress={props.handlePressWritingTime}>
+                                <ImageBackground resizeMode='cover' source={require('../../../../assets/exams/writingTime.png')} style={[sG.h_100, sG.w_100, sG.ai_center, sG.jc_center]}>
+                                </ImageBackground>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={[sG.w_50, sG.h_100, sG.ai_center, sG.jc_center]}>
                             <View style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded]}>
                             </View>
                         </View>

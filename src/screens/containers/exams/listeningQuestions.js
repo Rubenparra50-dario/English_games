@@ -138,6 +138,7 @@ export default class ListeningQuestions extends Component {
   componentDidMount () {
         this.getInfo();
         this.pushExamsFinalizedActually();
+        this.setState({acum:this.state.acum +1});
   }
 
 //--------------------- fin sección de eventos de botones ------------------------
@@ -244,23 +245,26 @@ export default class ListeningQuestions extends Component {
                                     </View>
                                     <View style={[sG.w_45, sG.h_100, sG.ai_center, sG.jc_center]}>
                                         <Text style={[sG.h4, sG.bold, sG.text_green_light]}>Correct</Text>
-                                        <Text style={[sG.h2, sG.bold, sG.text_gray_light]}>{this.state.acertadas-1}</Text>
+                                        <Text style={[sG.h2, sG.bold, sG.text_gray_light]}>{this.state.acertadas}</Text>
                                     </View>
                                 </View>
                                 <View style={[sG.w_80, sG.h_30, sG.ai_center, sG.jc_center]}>
-                                    {this.state.acertadas === 2?
+                                    {this.state.acertadas === 0?
+                                    <Text style={[sG.text_gray_light, sG.text_center, sG.h5]}>your effectiveness is 0%</Text>
+                                    :null}
+                                    {this.state.acertadas === 1?
                                     <Text style={[sG.text_gray_light, sG.text_center, sG.h5]}>your effectiveness is 20%</Text>
                                     :null}
-                                    {this.state.acertadas === 3?
+                                    {this.state.acertadas === 2?
                                     <Text style={[sG.text_gray_light, sG.text_center, sG.h5]}>your effectiveness is 40%</Text>
                                     :null}
-                                    {this.state.acertadas === 4?
+                                    {this.state.acertadas === 3?
                                     <Text style={[sG.text_gray_light, sG.text_center, sG.h5]}>your effectiveness is 60%</Text>
                                     :null}
-                                    {this.state.acertadas === 5?
+                                    {this.state.acertadas === 4?
                                     <Text style={[sG.text_gray_light, sG.text_center, sG.h5]}>your effectiveness is 80%</Text>
                                     :null}
-                                    {this.state.acertadas === 6?
+                                    {this.state.acertadas === 5?
                                     <Text style={[sG.text_gray_light, sG.text_center, sG.h5]}>your effectiveness is 100%</Text>
                                     :null}
                                 </View>

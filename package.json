@@ -13,6 +13,7 @@
     "expo": "^39.0.0",
     "expo-av": "~8.6.0",
     "expo-cli": "^3.22.3",
+    "expo-speech": "~8.4.0",
     "global": "^4.4.0",
     "lodash": "^4.17.20",
     "patch-package": "^6.2.2",

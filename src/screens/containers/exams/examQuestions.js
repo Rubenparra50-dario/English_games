@@ -121,6 +121,7 @@ export default class ExamsQuestions extends Component {
 
     componentDidMount () {
         this.getQuestions();
+        this.setState({acum:this.state.acum +1});
         this.pushExamsFinalizedActually();
     }
 
@@ -134,7 +135,7 @@ export default class ExamsQuestions extends Component {
         data_responses={this.state.data_responses}
         pregunta={this.state.pregunta}
         nombre_Quiz={this.state.nombre_Quiz}
-        acertadas={this.state.acertadas-1}
+        acertadas={this.state.acertadas}
 
         _toggleBottomNavigationView={this._toggleBottomNavigationView}
         handlePressResponse={this.handlePressResponse}

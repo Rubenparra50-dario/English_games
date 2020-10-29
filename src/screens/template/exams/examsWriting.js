@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import {View, Text, ImageBackground, TouchableOpacity, Modal} from 'react-native';
-import { Feather, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
+import {View, Text, ImageBackground, TouchableOpacity, Modal, TextInput} from 'react-native';
+import { MaterialCommunityIcons,Entypo, MaterialIcons, Feather } from '@expo/vector-icons';
 import { sG } from '../../components/general/styles';
 import { BottomSheet } from 'react-native-btr';
 
-export const ExamsQuestionsTemplate = props => {
+
+const url="../../../../assets/boardingGames.png";
+
+export const ExamsWritingTemplate = props => {
 
     return (
         <View style={[ sG.container, sG.bg_white]}>
@@ -18,51 +21,50 @@ export const ExamsQuestionsTemplate = props => {
         )}
 
         {!props.alignsecond ? null : (
-            <View style={[ sG.container]}>               
-                <ImageBackground resizeMode='cover' style={[sG.w_100, sG.h_100, sG.ai_center, sG.jc_center]} source={require('../../../../assets/backgroundMolecule.jpg')}>
-                    <View style={[sG.w_90, sG.h_15, sG.ai_center, sG.jc_center]}>
-                        <Text style={[sG.text_center, sG.bold, sG.h3, sG.text_secondary]}>{props.nombre_Quiz}</Text>
+            <ImageBackground resizeMode='cover' style={[sG.w_100, sG.h_100, sG.ai_center, sG.jc_center]} source={require('../../../../assets/backgroundMolecule.jpg')}>
+                <View style={[sG.h_10, sG.w_90, sG.ai_center, sG.jc_center]}>
+                    {props.tema===1?
+                    <Text style={[sG.h5, sG.text_green_light, sG.text_center, sG.bold]}>Prepositions of place</Text>
+                    :
+                    <Text style={[sG.h5, sG.text_green_light, sG.text_center, sG.bold]}>Prepositions of time</Text>
+                    }
+                </View>       
+                <TouchableOpacity style={[sG.h_10, sG.w_90, sG.ai_center, sG.jc_center, sG.bg_light, sG.chrow, sG.brounded, sG.bg_primary]} onPress={props.onSpeak}>
+                    <View style={[sG.w_20, sG.h_90, sG.ai_center, sG.jc_center]}>
+                        <MaterialIcons name="play-arrow" style={[sG.size_icon, sG.text_white]} />
+                    </View>                        
+                    <View style={[sG.w_80, sG.h_100, sG.ai_center, sG.jc_center]}>
+                        <Text style={[sG.h5, sG.text_white, sG.text_center, sG.bold]}>PLAY</Text>
                     </View>
-                    <View style={[sG.w_100, sG.h_65, sG.ai_center, sG.jc_center]}>
-                        <View style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded, sG.bg_white, sG.border, sG.card_shadow]}>
-                            <View style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center]}>
-                                <View style={[sG.h_20, sG.w_100, sG.ai_center, sG.jc_center]}>
-                                    <Text style={[sG.h5, sG.text_gray_light]}>{props.pregunta}</Text>
-                                </View>
-                                <View style={[sG.h_80, sG.w_100, sG.ai_center, sG.jc_center]}>
-                                    {props.data_responses.map((item, key) =>(
-                                        <View style={[sG.w_100, sG.h_20, sG.ai_center, sG.jc_center]}>
-                                            <TouchableOpacity style={[sG.w_100, sG.h_80, sG.ai_center, sG.jc_center, sG.border, sG.brounded, sG.chrow]} onPress={() => props.handlePressResponse(item.id)}>
-                                                <View style={[sG.w_20, sG.ai_center]}>
-                                                    <Feather name="check-circle" style={[sG.size_icon, sG.text_green_light]} />
-                                                </View>
-                                                <View style={[sG.w_80]}>
-                                                    <Text style={[sG.h5, sG.text_gray_light]}>{item.respuesta}</Text>
-                                                </View>
-                                            </TouchableOpacity>
-                                        </View>
-                                    ))}                                  
-                                </View>
-                            </View>
-                        </View>
-                    </View>
-                    <View style={[sG.w_100, sG.h_20, sG.ai_end, sG.jc_end, sG.bg_primary, sG.brounded_top_left_max]}>
-                        <View style={[sG.w_75, sG.h_50, sG.ai_center, sG.jc_center]}>
-                            <TouchableOpacity style={[sG.w_80, sG.h_90, sG.ai_center, sG.jc_end, sG.chrow]} onPress={props._toggleBottomNavigationView}>
-                                <View style={[sG.w_75, sG.h_100, sG.ai_end, sG.jc_center]}>
-                                    <Text style={[sG.bold, sG.text_white, sG.h3]}>Help</Text>
-                                </View>
-                                <View style={[sG.w_25, sG.h_100, sG.ai_end, sG.jc_center]}>
-                                    <Entypo name='help-with-circle' style={[sG.text_white, sG.size_icon]}/>
-                                </View>
+                </TouchableOpacity>        
+                <View style={[sG.h_5, sG.w_90]}></View>       
+                <View style={[sG.h_50, sG.w_90, sG.ai_center, sG.jc_center]}>
+                    <View style={[sG.h_90, sG.w_100, sG.ai_center, sG.jc_center, sG.bg_white, sG.border, sG.brounded, sG.card_shadow]}>
+                        <TextInput multiline={true} autoCapitalize = 'none' style={[sG.h_60, sG.w_85, sG.h7, sG.border, sG.p_xs]} placeholder='Write the sentence' placeholderTextColor = '#BDBDBD' value={props.inputText} onChangeText={(text)=>props.handleInputChange(text, "inputText")}>
+                        </TextInput>
+                        <View style={[sG.h_30, sG.w_90, sG.ai_center, sG.jc_center]}>
+                            <TouchableOpacity style={[sG.h_80, sG.w_90, sG.ai_center, sG.jc_center, sG.bg_green_light, sG.brounded, sG.chrow]} onPress={props.handlePressSend}>
+                                <Text style={[sG.h5, sG.text_white, sG.text_center, sG.bold]}>Send </Text>
+                                <MaterialIcons name="play-arrow" style={[sG.size_icon, sG.text_white]} />
                             </TouchableOpacity>
                         </View>
                     </View>
-                </ImageBackground>
-            </View>
-        )}        
- 
-            <BottomSheet
+                </View>    
+                <View style={[sG.h_5, sG.w_90]}></View>    
+                <View style={[sG.w_100, sG.h_20, sG.ai_end, sG.jc_end, sG.bg_primary, sG.brounded_top_left_max]}>
+                    <View style={[sG.w_75, sG.h_50, sG.ai_center, sG.jc_center]}>
+                        <TouchableOpacity style={[sG.w_80, sG.h_90, sG.ai_center, sG.jc_end, sG.chrow]} onPress={props._toggleBottomNavigationView}>
+                            <View style={[sG.w_75, sG.h_100, sG.ai_end, sG.jc_center]}>
+                                <Text style={[sG.bold, sG.text_white, sG.h3]}>Help</Text>
+                            </View>
+                            <View style={[sG.w_25, sG.h_100, sG.ai_end, sG.jc_center]}>
+                                <Entypo name='help-with-circle' style={[sG.text_white, sG.size_icon]}/>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
+                <BottomSheet
                 visible={props.visible}
                 //setting the visibility state of the bottom shee
                 onBackButtonPress={props._toggleBottomNavigationView}
@@ -79,7 +81,7 @@ export const ExamsQuestionsTemplate = props => {
                             <View style={[sG.h_90, sG.w_60, sG.ai_center, sG.jc_center]}>
                                 <View style={[sG.h_90, sG.w_90, sG.ai_center, sG.jc_center, sG.border, sG.brounded]}>
                                     <View style={[sG.h_90, sG.w_90, sG.ai_center, sG.jc_center]}>
-                                        <Text style={[sG.h6, sG.text_primary]}>Selecciona la respuesta corresta.</Text>
+                                        <Text style={[sG.h6, sG.text_primary]}>Escucha el audio y escribe la oración correctamente.</Text>
                                     </View>
                                 </View>
                             </View>
@@ -87,7 +89,7 @@ export const ExamsQuestionsTemplate = props => {
                         <View style={[sG.h_40, sG.w_100, sG.ai_center, sG.jc_center, sG.chrow]}>
                             <View style={[sG.h_90, sG.w_70, sG.ai_center, sG.jc_center, sG.border, sG.brounded]}>
                                 <View style={[sG.h_90, sG.w_90, sG.ai_center, sG.jc_center]}>
-                                    <Text style={[sG.h6, sG.text_primary]}>Select the correct answer.</Text>
+                                    <Text style={[sG.h6, sG.text_primary]}>Listen the audio and write the sentence correctly.</Text>
                                 </View>
                             </View>
                             <TouchableOpacity style={[sG.h_90, sG.w_20, sG.ai_center, sG.jc_end]} onPress={props._toggleBottomNavigationView}>
@@ -100,9 +102,15 @@ export const ExamsQuestionsTemplate = props => {
                 {/* inicio modal final */}
                 <Modal animationType="slide" transparent={true} visible={props.show}>
                     <View style={[sG.container, sG.ai_center, sG.jc_center]}>
-                        <View style={[sG.h_40, sG.w_80, sG.bg_white, sG.brounded, sG.ai_center, sG.jc_center, sG.card_shadow, sG.border]}>
+                        <View style={[sG.h_70, sG.w_90, sG.bg_white, sG.brounded, sG.ai_center, sG.jc_center, sG.card_shadow, sG.border]}>
                         <View style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center]}>
-                            <View style={[sG.w_100, sG.h_45, sG.ai_center, sG.jc_center, sG.chrow]}>
+                            <View style={[sG.w_90, sG.h_60, sG.jc_center]}>
+                                <Text style={[sG.h4, sG.bold, sG.text_green_light, sG.text_center, sG.p_b_sm]}>Answers</Text>
+                                {props.data_responses.map((item, key) =>(
+                                    <Text style={[sG.h6, sG.bold, sG.text_gray_light]}>{'* '+item.pregunta}</Text>
+                                ))}
+                            </View>
+                            <View style={[sG.w_100, sG.h_20, sG.ai_center, sG.jc_center, sG.chrow]}>
                                 <View style={[sG.w_45, sG.h_100, sG.ai_center, sG.jc_center]}>
                                     <Text style={[sG.h4, sG.bold, sG.text_green_light]}>Questions</Text>
                                     <Text style={[sG.h2, sG.bold, sG.text_gray_light]}>5</Text>
@@ -112,7 +120,7 @@ export const ExamsQuestionsTemplate = props => {
                                     <Text style={[sG.h2, sG.bold, sG.text_gray_light]}>{props.acertadas}</Text>
                                 </View>
                             </View>
-                            <View style={[sG.w_80, sG.h_30, sG.ai_center, sG.jc_center]}>
+                            <View style={[sG.w_80, sG.h_10, sG.ai_center, sG.jc_center]}>
                                 {props.acertadas === 0?
                                 <Text style={[sG.text_gray_light, sG.text_center, sG.h5]}>your effectiveness is 0%</Text>
                                 :null}
@@ -132,8 +140,8 @@ export const ExamsQuestionsTemplate = props => {
                                 <Text style={[sG.text_gray_light, sG.text_center, sG.h5]}>your effectiveness is 100%</Text>
                                 :null}
                             </View>
-                            <View style={[sG.w_100, sG.h_25, sG.ai_center, sG.jc_center]}>
-                                <TouchableOpacity style={[sG.w_90, sG.h_70, sG.ai_center, sG.jc_center, sG.brounded, sG.bg_green_light]} onPress={props.handlePressHome}>
+                            <View style={[sG.w_100, sG.h_10, sG.ai_center, sG.jc_center]}>
+                                <TouchableOpacity style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded, sG.bg_green_light]} onPress={props.handlePressHome}>
                                     <Text style={[sG.text_white, sG.text_center, sG.bold, sG.h6]}>Perfect!</Text>
                                 </TouchableOpacity>
                             </View>
@@ -142,6 +150,8 @@ export const ExamsQuestionsTemplate = props => {
                     </View>
                 </Modal>
                 {/* fin modal final */}
+            </ImageBackground>
+        )}
         </View>
     )
 }

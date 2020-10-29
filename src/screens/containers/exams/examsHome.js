@@ -60,6 +60,14 @@ export default class ExamsHome extends Component {
       this.props.navigation.navigate('ListeningQuestions',{tema:2})
     }
 
+    handlePressWritingPlace = () => {
+      this.props.navigation.navigate('ExamsWriting',{tema:1})
+    }
+
+    handlePressWritingTime = () => {
+      this.props.navigation.navigate('ExamsWriting',{tema:2})
+    }
+
     _toggleBottomNavigationView = () => {
         this.setState({ visible: !this.state.visible });
     };
@@ -81,6 +89,8 @@ export default class ExamsHome extends Component {
       _toggleBottomNavigationView={this._toggleBottomNavigationView}
       handlePressListeningAnimals={this.handlePressListeningAnimals}
       handlePressListeningOccupations={this.handlePressListeningOccupations}
+      handlePressWritingTime={this.handlePressWritingTime}
+      handlePressWritingPlace={this.handlePressWritingPlace}
       ></ExamsHomeTemplate>
     )
   }
