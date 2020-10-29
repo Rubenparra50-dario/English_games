@@ -25,7 +25,8 @@
       "supportsTablet": false
     },
     "android": {
-      "versionCode": 1
+      "versionCode": 1,
+      "package": "com.English.games"
     },
     "sdkVersion": "39.0.0"
   }

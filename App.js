@@ -14,6 +14,7 @@ import Memory from './src/screens/containers/games/memory/memory';
 import GamesHome from './src/screens/containers/games/gamesHome';
 import ExamsHome from './src/screens/containers/exams/examsHome';
 import ExamsQuestions from './src/screens/containers/exams/examQuestions';
+import ListeningQuestions from './src/screens/containers/exams/listeningQuestions';
 import AudioBooksHome from './src/screens/containers/audiobooks/audioBooksHome';
 import AudioBook from './src/screens/containers/audiobooks/audioBook';
 
@@ -150,6 +151,21 @@ const HomeStackNavigator=  createStackNavigator({
     screen: ExamsQuestions,
     navigationOptions: ({navigation}) => ({
       title: 'Exam Questions',
+      headerStyle: {
+        backgroundColor: '#5271ff',
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    })
+  },
+  ListeningQuestions:{
+    screen: ListeningQuestions,
+    navigationOptions: ({navigation}) => ({
+      title: 'Listening Questions',
       headerStyle: {
         backgroundColor: '#5271ff',
         borderBottomLeftRadius: 20,

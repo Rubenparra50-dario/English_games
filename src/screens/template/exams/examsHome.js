@@ -61,6 +61,20 @@ export const ExamsHomeTemplate = props => {
                             </TouchableOpacity>
                         </View>
                         <View style={[sG.w_50, sG.h_100, sG.ai_center, sG.jc_center]}>
+                            <TouchableOpacity style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded]} onPress={props.handlePressListeningAnimals}>
+                                <ImageBackground resizeMode='cover' source={require('../../../../assets/exams/listeningAnimals.png')} style={[sG.h_100, sG.w_100, sG.ai_center, sG.jc_center]}>
+                                </ImageBackground>
+                            </TouchableOpacity>
+                        </View>
+                    </View> 
+                    <View style={[sG.w_100, sG.row_60, sG.ai_center, sG.jc_center, sG.chrow]}>
+                        <View style={[sG.w_50, sG.h_100, sG.ai_center, sG.jc_center]}>
+                            <TouchableOpacity style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded]} onPress={props.handlePressListeningOccupations}>
+                                <ImageBackground resizeMode='cover' source={require('../../../../assets/exams/listeningOccupations.png')} style={[sG.h_100, sG.w_100, sG.ai_center, sG.jc_center]}>
+                                </ImageBackground>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={[sG.w_50, sG.h_100, sG.ai_center, sG.jc_center]}>
                             <View style={[sG.w_90, sG.h_90, sG.ai_center, sG.jc_center, sG.brounded]}>
                             </View>
                         </View>
